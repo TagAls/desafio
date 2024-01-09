@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Inject,
   Param,
@@ -15,6 +16,7 @@ import { CalculoParcelaProdutoDTO } from './dto/calculo-parcela-produto.dto';
 import { CalculoParcelaUseCase } from './use-cases/calcula-parcela-produto.use-case';
 import { UpdateProdutoUseCase } from './use-cases/update-produto.use-case';
 import { UpdateProdutoDto } from './dto/update-produto.dto';
+import { DeleteProdutoUseCase } from './use-cases/delete-produto.use-case';
 
 @Controller('produtos')
 export class ProdutoUseCaseController {
@@ -33,14 +35,19 @@ export class ProdutoUseCaseController {
   @Inject(UpdateProdutoUseCase)
   private readonly updateProdutoUseCase: UpdateProdutoUseCase;
 
+  @Inject(DeleteProdutoUseCase)
+  private readonly deleteProdutoUseCase: DeleteProdutoUseCase;
+
   @Post()
   create(@Body() createProdutoDto: CreateProdutoDto) {
     return this.criaProdutoUseCase.execute(createProdutoDto);
   }
 
   @Post('calcular-parcelas')
-  calculoParcela(@Body() calculoParcelaProdutoDTO: CalculoParcelaProdutoDTO) {
-    return this.calculoParcelaUseCase.execute(calculoParcelaProdutoDTO);
+  async calculoParcela(
+    @Body() calculoParcelaProdutoDTO: CalculoParcelaProdutoDTO,
+  ) {
+    return await this.calculoParcelaUseCase.execute(calculoParcelaProdutoDTO);
   }
 
   @Patch(':id')
@@ -56,5 +63,10 @@ export class ProdutoUseCaseController {
   @Get(':id')
   findById(@Param('id') id: string) {
     return this.findByIdProdutoUseCase.execute(id);
+  }
+
+  @Delete(':id')
+  delete(@Param('id') id: string) {
+    this.deleteProdutoUseCase.execute(id);
   }
 }

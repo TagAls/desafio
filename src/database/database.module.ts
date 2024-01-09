@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Produto } from 'src/produto/entities/produto.entity';
-import { Categoria } from 'src/categoria/entities/categoria.entity';
+import { Produto } from '../produto/entities/produto.entity';
+import { Categoria } from '../categoria/entities/categoria.entity';
 @Module({
   imports: [
     TypeOrmModule.forRootAsync({

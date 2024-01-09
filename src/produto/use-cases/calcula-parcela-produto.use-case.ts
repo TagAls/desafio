@@ -1,8 +1,8 @@
 import { InjectRepository } from '@nestjs/typeorm';
 import { CalculoParcelaProdutoDTO } from '../dto/calculo-parcela-produto.dto';
 import { Produto } from '../entities/produto.entity';
-import { Categoria } from 'src/categoria/entities/categoria.entity';
 import { Repository } from 'typeorm';
+import { Categoria } from '../../categoria/entities/categoria.entity';
 
 export class CalculoParcelaUseCase {
   constructor(

@@ -8,6 +8,7 @@ export interface IProdutoRepository {
   update(produto: Produto): Promise<void>;
   findAll(): Promise<Produto[]>;
   findById(id: string): Promise<Produto>;
+  delete(id: string): Promise<void>;
 }
 
 @Injectable()
@@ -26,6 +27,9 @@ export class ProdutoTypeOrmRepository implements IProdutoRepository {
     return this.typeOrmRepo.find();
   }
   findById(id: string): Promise<Produto> {
-    return this.typeOrmRepo.findOneOrFail({ where: { id } });
+    return this.typeOrmRepo.findOne({ where: { id } });
+  }
+  async delete(id: string): Promise<void> {
+    await this.typeOrmRepo.delete(id);
   }
 }
