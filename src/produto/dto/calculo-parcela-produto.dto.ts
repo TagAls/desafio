@@ -1,9 +1,9 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
 
-export class UpdateCategoriaDto {
+export class CalculoParcelaProdutoDTO {
   @ApiProperty({
-    description: 'Nome da categoria de protudos.',
+    description: 'Nome do produto que deseja calcular o valor das parcelas.',
     type: String,
   })
   @IsNotEmpty()
@@ -11,10 +11,11 @@ export class UpdateCategoriaDto {
   nome: string;
 
   @ApiProperty({
-    description: 'Porcentagem de juros que sera usado para calculo de parcelas',
+    description: 'Quantidade de parcelas que serão feitas.',
     type: Number,
+    minimum: 1,
   })
   @IsNotEmpty()
   @IsNumber()
-  juros: number;
+  parcelas: number;
 }
