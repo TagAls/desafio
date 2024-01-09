@@ -11,6 +11,7 @@ export class UpdateCategoriaUseCase {
     const categoria = await this.categoriaRepo.findById(id);
     input.nome && (categoria.nome = input.nome);
     input.juros && (categoria.juros = input.juros);
-    return this.categoriaRepo.update(categoria);
+    this.categoriaRepo.update(categoria);
+    return categoria;
   }
 }
