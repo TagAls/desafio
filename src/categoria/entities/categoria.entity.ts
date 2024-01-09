@@ -7,7 +7,7 @@ export class Categoria {
   id: string;
   @Column()
   nome: string;
-  @Column()
+  @Column({ type: 'decimal' })
   juros: number;
 
   constructor(props: { nome: string; juros: number }, id?: string) {
