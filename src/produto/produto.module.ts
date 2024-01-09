@@ -7,6 +7,10 @@ import { CreateProdutoUseCase } from './use-cases/create-produto.use-case';
 import { FindAllProdutoUseCase } from './use-cases/find-all-produto.use-case';
 import { FindByIdProdutoUseCase } from './use-cases/find-by-id-produto.use-case';
 import { ProdutoTypeOrmRepository } from './produto.repository';
+import { CalculoParcelaUseCase } from './use-cases/calcula-parcela-produto.use-case';
+import { Categoria } from 'src/categoria/entities/categoria.entity';
+import { CategoriaTypeOrmRepository } from 'src/categoria/categoria.repository';
+import { UpdateProdutoUseCase } from './use-cases/update-produto.use-case';
 
 @Module({
   controllers: [ProdutoUseCaseController],
@@ -15,12 +19,19 @@ import { ProdutoTypeOrmRepository } from './produto.repository';
     CreateProdutoUseCase,
     FindAllProdutoUseCase,
     FindByIdProdutoUseCase,
+    CalculoParcelaUseCase,
+    UpdateProdutoUseCase,
     ProdutoTypeOrmRepository,
     {
       provide: 'IProdutoRepository',
       useExisting: ProdutoTypeOrmRepository,
     },
+    CategoriaTypeOrmRepository,
+    {
+      provide: 'ICategoriaRepository',
+      useExisting: CategoriaTypeOrmRepository,
+    },
   ],
-  imports: [TypeOrmModule.forFeature([Produto])],
+  imports: [TypeOrmModule.forFeature([Produto, Categoria])],
 })
 export class ProdutoModule {}

@@ -1,8 +1,18 @@
-import { Body, Controller, Get, Inject, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Inject,
+  Param,
+  Patch,
+  Post,
+} from '@nestjs/common';
 import { CreateCategoriaUseCase } from './use-cases/create-categoria.use-case';
 import { CreateCategoriaDto } from './dto/create-categoria.dto';
 import { FindAllCategoriaUseCase } from './use-cases/find-all-categoria.use-case';
 import { FindByIdCategoriaUseCase } from './use-cases/find-by-id-categoria.use-case';
+import { UpdateCategoriaDto } from './dto/update-categoria.dto';
+import { UpdateCategoriaUseCase } from './use-cases/update-categoria.use-case';
 
 @Controller('categorias')
 export class CategoriaUseCaseController {
@@ -15,9 +25,20 @@ export class CategoriaUseCaseController {
   @Inject(FindByIdCategoriaUseCase)
   private readonly findByIdCategoriaUseCase: FindByIdCategoriaUseCase;
 
+  @Inject(UpdateCategoriaUseCase)
+  private readonly updateCategoriaUseCase: UpdateCategoriaUseCase;
+
   @Post()
   create(@Body() createCategoriaDto: CreateCategoriaDto) {
     return this.criaCategoriaUseCase.execute(createCategoriaDto);
+  }
+
+  @Patch(':id')
+  update(
+    @Param('id') id: string,
+    @Body() updateCategoriaDto: UpdateCategoriaDto,
+  ) {
+    return this.updateCategoriaUseCase.execute(id, updateCategoriaDto);
   }
 
   @Get()
