@@ -9,6 +9,10 @@ export class CreateCategoriaUseCase {
     private readonly categoriaRepo: ICategoriaRepository,
   ) {}
   async execute(input: CreateCategoriaDto) {
+    const categoriaExistente = this.categoriaRepo.findByName(input.nome);
+    if (categoriaExistente) {
+      return 'Já existe uma categoria com esse nome cadastrado';
+    }
     const categoria = new Categoria(input);
     await this.categoriaRepo.create(categoria);
     return categoria;
