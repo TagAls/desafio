@@ -1,5 +1,4 @@
 import { Module } from '@nestjs/common';
-import { CategoriaService } from './categoria.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Categoria } from './entities/categoria.entity';
 import { CreateCategoriaUseCase } from './use-cases/create-categoria.use-case';
@@ -12,7 +11,6 @@ import { UpdateCategoriaUseCase } from './use-cases/update-categoria.use-case';
 @Module({
   controllers: [CategoriaUseCaseController],
   providers: [
-    CategoriaService,
     CreateCategoriaUseCase,
     FindAllCategoriaUseCase,
     FindByIdCategoriaUseCase,
