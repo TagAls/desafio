@@ -5,9 +5,9 @@ import crypto from 'crypto';
 export class Categoria {
   @PrimaryColumn()
   id: string;
-  @Column()
+  @Column({ nullable: false })
   nome: string;
-  @Column({ type: 'decimal' })
+  @Column({ type: 'decimal', nullable: false })
   juros: number;
 
   constructor(props: { nome: string; juros: number }, id?: string) {

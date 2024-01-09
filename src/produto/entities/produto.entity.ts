@@ -9,7 +9,7 @@ export class Produto {
   nome: string;
   @Column({ nullable: false })
   descricao: string;
-  @Column({ nullable: false })
+  @Column({ type: 'decimal', nullable: false })
   valor: number;
   @Column({ nullable: false })
   idCategoria: string;
