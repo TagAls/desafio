@@ -7,6 +7,7 @@ import { FindByIdCategoriaUseCase } from './use-cases/find-by-id-categoria.use-c
 import { CategoriaTypeOrmRepository } from './categoria.repository';
 import { CategoriaUseCaseController } from './categoria-use-case.controller';
 import { UpdateCategoriaUseCase } from './use-cases/update-categoria.use-case';
+import { DeleteCategoriaUseCase } from './use-cases/delete-catergoria.use-case';
 
 @Module({
   controllers: [CategoriaUseCaseController],
@@ -16,6 +17,7 @@ import { UpdateCategoriaUseCase } from './use-cases/update-categoria.use-case';
     FindByIdCategoriaUseCase,
     CategoriaTypeOrmRepository,
     UpdateCategoriaUseCase,
+    DeleteCategoriaUseCase,
     {
       provide: 'ICategoriaRepository',
       useExisting: CategoriaTypeOrmRepository,

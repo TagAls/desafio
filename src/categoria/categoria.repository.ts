@@ -30,10 +30,10 @@ export class CategoriaTypeOrmRepository implements ICategoriaRepository {
   findById(id: string): Promise<Categoria> {
     return this.typeOrmRepo.findOneOrFail({ where: { id } });
   }
-  async findByName(nome: string): Promise<Categoria> {
-    return await this.typeOrmRepo.findOne({ where: { nome } });
+  findByName(nome: string): Promise<Categoria> {
+    return this.typeOrmRepo.findOne({ where: { nome } });
   }
   async delete(id: string): Promise<void> {
-    this.typeOrmRepo.delete(id);
+    await this.typeOrmRepo.delete(id);
   }
 }

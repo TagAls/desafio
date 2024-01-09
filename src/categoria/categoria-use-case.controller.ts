@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Inject,
   Param,
@@ -13,6 +14,7 @@ import { FindAllCategoriaUseCase } from './use-cases/find-all-categoria.use-case
 import { FindByIdCategoriaUseCase } from './use-cases/find-by-id-categoria.use-case';
 import { UpdateCategoriaDto } from './dto/update-categoria.dto';
 import { UpdateCategoriaUseCase } from './use-cases/update-categoria.use-case';
+import { DeleteCategoriaUseCase } from './use-cases/delete-catergoria.use-case';
 
 @Controller('categorias')
 export class CategoriaUseCaseController {
@@ -27,6 +29,9 @@ export class CategoriaUseCaseController {
 
   @Inject(UpdateCategoriaUseCase)
   private readonly updateCategoriaUseCase: UpdateCategoriaUseCase;
+
+  @Inject(DeleteCategoriaUseCase)
+  private readonly deleteCategoriaUseCase: DeleteCategoriaUseCase;
 
   @Post()
   create(@Body() createCategoriaDto: CreateCategoriaDto) {
@@ -49,5 +54,10 @@ export class CategoriaUseCaseController {
   @Get(':id')
   findById(@Param('id') id: string) {
     return this.findByIdCategoriaUseCase.execute(id);
+  }
+
+  @Delete(':id')
+  delete(@Param('id') id: string) {
+    this.deleteCategoriaUseCase.execute(id);
   }
 }
